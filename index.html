@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>octane</title>
+    <title>NCAA Soccer</title>
     <!-- add your own favicon - https://favicon.io/ -->
     <link rel="shortcut icon" href="./images/logo.svg" type="image/x-icon">
     <!-- reset default browser stylesheet -->
@@ -23,7 +23,7 @@
     <nav>
         <div class="logo-box dim">
             <img class="logo" src="./images/logo.svg" alt="logo">
-            <h1>octane</h1>
+            <h1>NCAA Soccer</h1>
         </div>
         <div class="menu-items">
             <p class="menu-button dim">
@@ -31,33 +31,47 @@
                     menu
                 </span>
             </p>
-            <ul id="menu-logged-in" class="hidden">
-                <li><a class="dim" href="./admin.html">Admin</a></li>
-                <li><a class="dim" href="./dashboard.html">Dashboard</a></li>
-                <li><a id="logout" class="dim" href="#">Logout</a></li>
-            </ul>
             <ul id="menu-logged-out" class="hidden menu">
-                <li><a id="login" class="dim" href="#">Login</a></li>
+                <li><a class="dim" href="#">Bracket</a></li>
+                <!-- <li><a id="login" class="dim" href="#">Login</a></li> -->
             </ul>
         </div>
     </nav>
     <main>
         <div class="container">
             <header>
-                <h2>A Minimal Static Webpage Template</h2>
-                <a class="rounded-btn white-black-btn" href="./template.html">View Template!</a>
+                <div class="header-text">
+                    <h2>Cary, NC</h2>
+                    <h2>Dec. 11 - 14</h2>
+                </div>
             </header>
+            
             <div class="infos">
-                <div class="info">
+                <h1>Tournament Matchups</h1>
+                <!-- <div class="matchup">
+                    <div class="teams">
+                        <div class="team-box">
+                            <img src="https://www.ncaa.com/sites/default/files/images/logos/schools/bgl/missouri-st.svg" alt="">
+                            <h3>Missouri State</h3>
+                        </div>
+                        <p>at</p>
+                        <div class="team-box">
+                            <img src="https://www.ncaa.com/sites/default/files/images/logos/schools/bgl/indiana.svg" alt="">
+                            <h3>Indiana</h3>
+                        </div>
+                    </div>
+                    <p class="time">Sunday, 12:00pm</p>
+                </div> -->
+                <!-- <div class="info">
+                    <div class="info-info"></div>
                     <div class="info-info">
-                        <h1>Header</h1>
                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam in corrupti cum nulla
                             doloribus deserunt maiores est! Quam possimus autem quae natus ipsam iure eos corrupti
                             deserunt, asperiores tempore a.</p>
                     </div>
                     <img src="./images/reggie.png" alt="Image 1">
-                </div>
-                <div class="info">
+                </div> -->
+                <!-- <div class="info">
                     <div class="info-info">
                         <h1>Header</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis cum vel, reiciendis dicta
@@ -65,15 +79,14 @@
                             sed sapiente praesentium quibusdam quam minima.</p>
                     </div>
                     <img src="./images/cow.jpg" alt="Image 2">
-                </div>
+                </div> -->
             </div>
             <div class="faqs">
                 <h2>Frequently Asked Questions</h2>
                 <div class="faqs-container">
                     <div class="faq">
-                        <h3>Where do I go from here?</h3>
-                        <p class="hidden">If <strong>octane</strong> interests you in any regard, I recommend you take a
-                            look at the <a class="dim" href="https://github.com/lill1e/octane">GitHub</a>!</p>
+                        <h3>Where does this information come from?</h3>
+                        <p class="hidden">All of the information displayed on this website is retrieved via reverse-engineered endpoints from the <a class="dim" target="_blank" href="https://unigol.app">UniGol</a> mobile app</p>
                     </div>
                 </div>
             </div>
@@ -83,8 +96,8 @@
             <img class="logo" src="./images/logo.svg" alt="logo">
         </div>
         <div class="footer-buttons">
-            <a class="rounded-btn black-white-btn" href="https://github.com/lill1e/octane">Source Code</a>
-            <a class="rounded-btn black-white-btn" href="./wiki.html">Wiki</a>
+            <a class="rounded-btn black-white-btn" href="https://github.com/lill1e/fulltime">Source Code</a>
+            <!-- <a class="rounded-btn black-white-btn" href="./wiki.html">Wiki</a> -->
         </div>
     </footer>
 
@@ -98,6 +111,8 @@
             document.querySelector("#menu-logged-out").classList.toggle("menu")
         }))
     </script>
+
+    <script src="js/unigol.js"></script>
 </body>
 
 </html>
