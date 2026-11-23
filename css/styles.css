@@ -602,7 +602,7 @@ section>p {
 }
 
 .matchup .time {
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
 }
 
 .matchup img {
@@ -618,6 +618,12 @@ section>p {
     flex-basis: 0;
     width: auto;
     min-width: 0;
+}
+
+.matchup .match-status {}
+
+.matchup > .match-status > p {
+
 }
 
 .team-box h3 {
@@ -636,7 +642,7 @@ section>p {
     }
 
     .matchup .time {
-        margin-top: 1rem;
+        margin-top: 0;
     text-overflow: ellipsis;
     /* overflow: hidden; */
     white-space: nowrap;
@@ -646,6 +652,15 @@ section>p {
         max-height: 6rem;
     }
 }
+
+.matchup .subheader {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 24px;
+    font-weight: normal;
+}
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * *
     MEDIA QUERIES 
