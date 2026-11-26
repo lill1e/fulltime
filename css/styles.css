@@ -625,10 +625,8 @@ section>p {
     min-width: 0;
 }
 
-.matchup .match-status {}
-
-.matchup > .match-status > p {
-
+.matchup .match-status {
+    text-align: center;
 }
 
 .team-box h3 {
