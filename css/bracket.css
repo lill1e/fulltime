@@ -49,6 +49,7 @@ li.winner {
 
 @media (width <576px) {
     .bracket-class {
+        justify-content: start;
         width: 100%;
     }
 }
