@@ -137,12 +137,13 @@ function populateBracket() {
             let home_team = slot.home_team_id ?? lastRoundWinner(bracketData, round, slot.home_from_slot)
             let away_team = slot.away_team_id ?? lastRoundWinner(bracketData, round, slot.away_from_slot)
             let match = matches.find(match => [home_team, away_team].includes(match.home_team_id) && [home_team, away_team].includes(match.away_team_id))
+            console.log(match)
             bracketData[round - 1][slotNumber - 1] = {
                 type: (slot.home_team_id && slot.away_team_id) ? "natural" : ((slot.home_team_id || slot.away_team_id) ? "mixed" : "result"),
                 home: home_team,
                 away: away_team,
-                home_name: match.home_team.display_name,
-                away_name: match.away_team.display_name,
+                home_name: home_team == match.home_team.id ? match.home_team.display_name : match.away_team.display_name,
+                away_name: away_team == match.away_team.id ? match.away_team.display_name : match.home_team.display_name,
                 match_id: match.id,
                 winner: deduceWinner(match, home_team, away_team),
                 final: match.status == "final"
