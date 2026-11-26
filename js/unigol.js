@@ -6,7 +6,6 @@ function decideDates() {
     let current = new Date(Date.now())
     let month = current.getMonth() + 1
     let day = current.getDate()
-    console.log(month, day)
 
     let last = -1
 
@@ -48,7 +47,6 @@ function getMatches() {
             "final": matchups.filter(matchup => matchup.status == "final")
         }
         matchupSort.live.concat(matchupSort.scheduled).concat(matchupSort.final).forEach(matchup => {
-            console.log(matchup)
             let date = new Date(matchup.scheduled_at)
             let week_days = [
                 "Sunday", "Monday", "Tuesday",
@@ -59,7 +57,6 @@ function getMatches() {
             let minutes = date.getMinutes().toString().padStart(2, "0")
             let tod = hour >= 12 ? "pm" : "am"
             if (hour > 12) hour -= 12
-            console.log()
             let clock = ""
             let subheader = ""
             if (matchup.status == "scheduled") {
