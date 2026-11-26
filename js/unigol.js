@@ -13,7 +13,8 @@ function decideDates() {
     for (let i = 0; i < dates.length; i++) {
         let cluster = dates[i]
         last = i
-        if (!cluster.some(([m, d]) => m > month && d > day)) break
+        if (!cluster.some(([m, d]) => m > month || (m == month && d > day))) continue
+        else break
     }
 
     return last
