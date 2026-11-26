@@ -64,7 +64,7 @@ function getMatches() {
             let subheader = ""
             if (matchup.status == "scheduled") {
                 clock = `${week_days[date.getDay()]}, ${hour.toString()}:${minutes}${tod}`
-                subheader = matchup.broadcast_name ?? ""
+                subheader = matchup.broadcast_name ?? "&nbsp;"
             } else if (matchup.status == "live") {
                 clock = parseTime(matchup.clock_display)
                 subheader = `${matchup.away_score}-${matchup.home_score}${(matchup.pk_home_score || matchup.pk_away_score) ? ` (${matchup.pk_away_score}-${matchup.pk_home_score})` : ""}`
