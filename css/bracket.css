@@ -1,0 +1,54 @@
+.bracket {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.bracket ul {
+    padding: 0;
+    margin: 1rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.bracket li {
+    list-style-type: none;
+    border: 1px solid black;
+    padding: 0.25rem;
+}
+
+li.winner {
+    font-weight: bold;
+}
+
+.bracket li:nth-child(odd) {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.bracket li:nth-child(even) {
+    margin-top: 0;
+}
+
+.bracket li:only-child {
+    border: 2px solid black;
+}
+
+.bracket-class {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+}
+
+@media (width <576px) {
+    .bracket-class {
+        width: 100%;
+    }
+}

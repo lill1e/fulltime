@@ -95,3 +95,76 @@ function getMatches() {
         // 
     })
 }
+
+function lookupBracket() {
+    return fetch(`https://api.unigoldata.app/rest/v1/matches?select=id%2Chome_team_id%2Caway_team_id%2Chome_score%2Caway_score%2Cpk_home_score%2Cpk_away_score%2Cscheduled_at%2Cvenue%2Cvenue_ref%3Avenues%28name%2Ccity%2Cstate%29%2Chome_team%3Ateams%21matches_home_team_id_fkey%28id%2Cdisplay_name%2Clogo_url%3Aapp_crest%29%2Caway_team%3Ateams%21matches_away_team_id_fkey%28id%2Cdisplay_name%2Clogo_url%3Aapp_crest%29%2Cstatus&season_year=eq.2026&game_type=eq.ncaa_tournament&legacy_visible=eq.true&order=scheduled_at.asc`, {
+        headers: {
+            "apikey": apikey
+        }
+    }).then(res => res.json())
+}
+
+function deduceWinner(match, home, away) {
+    let homeCase = match.home_team_id == home && match.away_team_id == away
+    if (match.home_score > match.away_score) return homeCase
+    else if (match.away_score > match.home_score) return !homeCase
+    else {
+        if (match.pk_home_score > match.pk_away_score) return homeCase
+        else if (match.pk_away_score > match.pk_home_score) return !homeCase
+    }
+}
+
+function lastRoundWinner(bracket, round, slot) {
+    let bracketSlot = bracket[round - 2][slot - 1]
+    if (bracketSlot.winner) return bracketSlot.home
+    else return bracketSlot.away
+}
+
+function populateBracket() {
+    fetch("https://api.unigoldata.app/rest/v1/national_tournament_slots?select=id%2Cround_number%2Cslot_number%2Chome_team_id%2Caway_team_id%2Chome_seed%2Caway_seed%2Chome_from_slot%2Caway_from_slot%2Cscheduled_date&division=eq.d1&season_year=eq.2026&order=round_number.asc%2Cslot_number.asc", {
+        headers: {
+            "apikey": apikey
+        }
+    }).then(res => res.json())
+    .then(bracket => Promise.all([bracket, lookupBracket()])).then(([bracket, matches]) => {
+        let bracketData = []
+        for (let i = 0; i < bracket.length; i++) {
+            let slot = bracket[i]
+
+            let round = slot.round_number
+            let slotNumber = slot.slot_number
+            while (bracketData.length < round) bracketData.push([])
+            while (bracketData[round - 1].length < slotNumber) bracketData[round - 1].push({})
+            if (!slot.home_team_id && !bracketData[round - 2][slot.home_from_slot - 1].final) continue
+            if (!slot.away_team_id && !bracketData[round - 2][slot.away_from_slot - 1].final) continue
+            let home_team = slot.home_team_id ?? lastRoundWinner(bracketData, round, slot.home_from_slot)
+            let away_team = slot.away_team_id ?? lastRoundWinner(bracketData, round, slot.away_from_slot)
+            let match = matches.find(match => [home_team, away_team].includes(match.home_team_id) && [home_team, away_team].includes(match.away_team_id))
+            bracketData[round - 1][slotNumber - 1] = {
+                type: (slot.home_team_id && slot.away_team_id) ? "natural" : ((slot.home_team_id || slot.away_team_id) ? "mixed" : "result"),
+                home: home_team,
+                away: away_team,
+                home_name: match.home_team.display_name,
+                away_name: match.away_team.display_name,
+                match_id: match.id,
+                winner: deduceWinner(match, home_team, away_team),
+                final: match.status == "final"
+            }
+        }
+        return bracketData
+    }).then(bracket => {
+        bracket.forEach(matchups => {
+            let matchupsHtml = matchups.map(matchup => `
+                <ul>
+                    <li class="${matchup.winner == true ? "winner" : ""}">${matchup.home_name ?? "TBD"}</li>
+                    <li class="${matchup.winner == false ? "winner" : ""}">${matchup.away_name ?? "TBD"}</li>
+                </ul>
+            `)
+            document.querySelector(".bracket").innerHTML += `
+            <div class="bracket-class">
+                ${matchupsHtml.join("")}
+            </div>
+            `
+        })
+    })
+}
