@@ -101,6 +101,7 @@
         </div>
     </footer>
 
+    <script src="js/unigol.js"></script>
     <script>
         document.querySelector(".menu-button").addEventListener("click", () => document.querySelector(".menu").classList.toggle("hidden"))
         document.querySelectorAll(".logo-box").forEach(v => v.addEventListener("click", () => document.location.href = "./index.html"))
@@ -110,9 +111,8 @@
             document.querySelector("#menu-logged-in").classList.toggle("menu")
             document.querySelector("#menu-logged-out").classList.toggle("menu")
         }))
+        getMatches()
     </script>
-
-    <script src="js/unigol.js"></script>
 </body>
 
 </html>
