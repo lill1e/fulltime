@@ -35,7 +35,7 @@ function getMatches() {
     end = [end[0], end[1] + 1]
     
     let select = "id%2Cbroadcast_name%2Cncaa_game_id%2Cscheduled_at%2Cscheduled_at_semantics%2Cstatus%2Chome_score%2Caway_score%2Cpk_home_score%2Cpk_away_score%2Cis_conference_game%2Cgame_type%2Cunresolved_opponent_name%2Cclock_display%2Chome_ncaa_division%2Caway_ncaa_division%2Chome_team%3Ateams%21matches_home_team_id_fkey%28id%2Cschool_name%2Cdisplay_name%2Cncaa_seo%2Clogo_url%3Aapp_crest%2Ctimezone%3Aapp_timezone%29%2Caway_team%3Ateams%21matches_away_team_id_fkey%28id%2Cschool_name%2Cdisplay_name%2Cncaa_seo%2Clogo_url%3Aapp_crest%2Ctimezone%3Aapp_timezone%29%2Cside_links%3Amatch_side_links%28side%2Cncaa_division%2Cteam%3Ateams%28id%2Cschool_name%2Cdisplay_name%2Cncaa_seo%2Clogo_url%3Aapp_crest%2Ctimezone%3Aapp_timezone%29%29"
-    fetch(`https://api.unigoldata.app/rest/v1/matches?select=${select}&scheduled_at_semantics=eq.utc_instant&or=%28game_type.neq.exhibition%2Cgame_type.is.null%29&scheduled_at=gte.2026-${start.join("-")}T05%3A00%3A00.000Z&scheduled_at=lt.2026-${end.join("-")}T05%3A00%3A00.000Z&legacy_visible=eq.true`, {
+    fetch(`https://api.unigoldata.app/rest/v1/matches?select=${select}&or=%28game_type.neq.exhibition%2Cgame_type.is.null%29&scheduled_at=gte.2026-${start.join("-")}T05%3A00%3A00.000Z&scheduled_at=lt.2026-${end.join("-")}T05%3A00%3A00.000Z&legacy_visible=eq.true`, {
         headers: {
             "apikey": apikey
         }
