@@ -596,7 +596,7 @@ section>p {
     padding: 2rem;
     border-radius: 2rem;
     margin: 1rem;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
     /* box-shadow: ; */
 }
 
