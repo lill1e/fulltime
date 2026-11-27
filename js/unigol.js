@@ -69,7 +69,7 @@ function getMatches() {
                 clock = `FT ${matchup.away_score}-${matchup.home_score}`
                 if (matchup.pk_home_score || matchup.pk_away_score) subheader = `(${matchup.pk_away_score}-${matchup.pk_home_score})`
             }
-            document.querySelector(".infos").innerHTML += `
+            document.querySelector(".matchups").innerHTML += `
             <div class="matchup">
                 <div class="teams">
                     <div class="team-box">
